@@ -92,7 +92,8 @@ class CustomOpenPlugin extends Plugin {
   launchTerminal(folderPath) {
     let command;
     if (process.platform === "win32") {
-      command = `start powershell -NoExit -Command "Set-Location -LiteralPath '${folderPath.replace(/'/g, "''")}'"`;    } else if (process.platform === "darwin") {
+      command = `wt -d "${folderPath}"`;
+    } else if (process.platform === "darwin") {
       command = `open -a Terminal "${folderPath}"`;
     } else {
       // Linux: try common terminal emulators
