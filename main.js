@@ -78,11 +78,16 @@ class CustomOpenPlugin extends Plugin {
   }
 
   launchVSCode(targetPath) {
-    const command = `code "${targetPath}"`;
+    let command;
+    if (process.platform === "darwin") {
+      command = `open -a "Visual Studio Code" "${targetPath}"`;
+    } else {
+      command = `code "${targetPath}"`;
+    }
     exec(command, (error) => {
       if (error) {
         new Notice(
-          "Could not open VS Code. Make sure 'code' is in your PATH."
+          "Could not open VS Code. Make sure VS Code is installed."
         );
         console.error("Open in VS Code error:", error);
       }
